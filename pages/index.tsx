@@ -2,6 +2,7 @@ import { GetCharacter } from "@/api/hooks/useCharacter"
 import CharacterItem from "@/components/Character/CharacterItem";
 import styles from './global.module.scss'
 import Link from "next/link";
+import { Grid } from "@mui/material";
 
 export type CharacterCardItem = {
   created: string;
@@ -23,13 +24,18 @@ export default function Home({data}:{data:CharacterCardItem[]}) {
     return (
         <main>
             <div className={styles.container}>
-                {data.map(({image, name, species, id}) => {
-                    const userId = id.toString();
-                    return (
-                        <Link href={userId} key={id}>
-                            <CharacterItem image={image} name={name} species={species} id={id} key={userId}/>
-                        </Link>)
-                })}
+                <Grid container spacing={2}>
+                    {data.map(({image, name, species, id}) => {
+                        const userId = id.toString();
+                        return (
+                            <Grid item md={4} xs={6} key={id}>
+                                <Link href={userId} className={styles.link}>
+                                    <CharacterItem image={image} name={name} species={species} id={id} key={userId}/>
+                                </Link>
+                            </Grid>
+                        )
+                    })}
+                </Grid>
             </div>
         </main>
     )

@@ -1,3 +1,4 @@
+import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
 import styles from './CharacterItem.module.scss';
 
 interface iCharacterItem {
@@ -9,12 +10,23 @@ interface iCharacterItem {
 
 const CharacterItem: React.FC<iCharacterItem>= ({image, name, id, species}) => {
   return (
-    <div className={styles.characterItem}>
-      <img src={image} alt={name} />
-      <h2>{name}</h2>
-      <h2>{id}</h2>
-      <h2>{species}</h2>
-    </div>
+    <Card>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          image={image}
+          alt={name}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {species}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 
